@@ -21,17 +21,14 @@ class UserSerializer(serializers.ModelSerializer):
 
 # Serializador para el inicio de sesión del Usuario
 class UserLoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
+    username = serializers.CharField(required=True)
     password = serializers.CharField(write_only=True)
 
     def validate(self, data):
         """Valida las credenciales del usuario"""
-        print(f"Datos recibidos: {data}")
-        user = authenticate(username=data['username'], password=data['password'])
-        if not user:
-            print("Credenciales no válidas")
+        user = authenticate(username=data.get('username'), password=data.get('password'))
+        if user is None:
             raise serializers.ValidationError("Credenciales no válidas")
-        print(f"Usuario autenticado: {user}")
         return user
 
 # Serializador para el modelo de Tareas
