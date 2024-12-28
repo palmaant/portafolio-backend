@@ -26,9 +26,12 @@ class UserLoginSerializer(serializers.Serializer):
 
     def validate(self, data):
         """Valida las credenciales del usuario"""
-        user = authenticate(username=data.get('username'), password=data.get('password'))
-        if user is None:
+        print(f"Datos recibidos: {data}")
+        user = authenticate(username=data['username'], password=data['password'])
+        if not user:
+            print("Credenciales no válidas")
             raise serializers.ValidationError("Credenciales no válidas")
+        print(f"Usuario autenticado: {user}")
         return user
 
 # Serializador para el modelo de Tareas

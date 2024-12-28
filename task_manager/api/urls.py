@@ -11,6 +11,7 @@ router.register(r'tasks', TaskViewSet, basename='task')  # Registrar TaskViewSet
 # Configuración de las URLs
 urlpatterns = [
     path('', include(router.urls)),  # Incluir todas las URLs del router
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # Endpoint para obtener el token
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Endpoint para refrescar el token
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('users/login/', UserViewSet.as_view({'post': 'login'}), name='login'),
 ]

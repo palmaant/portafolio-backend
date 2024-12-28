@@ -11,7 +11,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    @action(detail=False, methods=['post'])
+    @action(detail=False, methods=['post'], permission_classes=[IsAuthenticated])
     def login(self, request):
         """Vista personalizada para el inicio de sesión"""
         serializer = UserLoginSerializer(data=request.data)
@@ -23,7 +23,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 "access": str(token.access_token),  # Token de acceso
                 "refresh": str(token)               # Token de refresh
             }, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"error": "Credenciales no válidas"}, status=status.HTTP_401_UNAUTHORIZED)
 
 # Vista para el manejo de tareas
 class TaskViewSet(viewsets.ModelViewSet):
