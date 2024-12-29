@@ -21,12 +21,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 # Serializador para el inicio de sesión del Usuario
 class UserLoginSerializer(serializers.Serializer):
-    username = serializers.CharField(required=True)
+    username = serializers.CharField()
     password = serializers.CharField(write_only=True)
 
     def validate(self, data):
         """Valida las credenciales del usuario"""
-        user = authenticate(username=data.get('username'), password=data.get('password'))
+        user = authenticate(username=data['username'], password=data['password'])
         if user is None:
             raise serializers.ValidationError("Credenciales no válidas")
         return user
