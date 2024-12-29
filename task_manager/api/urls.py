@@ -1,17 +1,12 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import UserViewSet, TaskViewSet
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from .views import TaskViewSet, UserLoginView
 
-# Crear el router y registrar los viewsets
+# Router para las vistas basadas en ViewSets
 router = DefaultRouter()
-router.register(r'users', UserViewSet, basename='user')  # Registrar UserViewSet
-router.register(r'tasks', TaskViewSet, basename='task')  # Registrar TaskViewSet con basename
+router.register(r'tasks', TaskViewSet)
 
-# Configuración de las URLs
 urlpatterns = [
-    path('', include(router.urls)),  # Incluir todas las URLs del router
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('users/login/', UserViewSet.as_view({'post': 'login'}), name='login'),
+    path('api/', include(router.urls)),  # API para las tareas
+    path('api/login/', UserLoginView.as_view(), name='user-login'),  # Login de usuario
 ]
