@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 # Crear el router y registrar los viewsets
 router = DefaultRouter()
-router.register(r'users', UserViewSet)  # Registrar UserViewSet
+router.register(r'users', UserViewSet, basename='user')  # Registrar UserViewSet
 router.register(r'tasks', TaskViewSet, basename='task')  # Registrar TaskViewSet con basename
 
 # Configuración de las URLs

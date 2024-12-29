@@ -17,13 +17,12 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.validated_data
-            # Crear los tokens
             token = RefreshToken.for_user(user)
             return Response({
                 "access": str(token.access_token),  # Token de acceso
                 "refresh": str(token)               # Token de refresh
             }, status=status.HTTP_200_OK)
-        return Response({"error": "Credenciales no válidas"}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Vista para el manejo de tareas
 class TaskViewSet(viewsets.ModelViewSet):
