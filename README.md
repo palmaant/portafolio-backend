@@ -33,9 +33,3 @@ Tkinter (interfaz gráfica)
 🔹 3. Ejecutar la aplicación
 
     python gestor_inventarios.py
-
-🔧 Mejoras Futuras
-
-🔹 Agregar opción para editar y eliminar productos.
-🔹 Exportar datos en formato CSV o PDF.
-🔹 Agregar búsqueda y filtros avanzados.
