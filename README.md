@@ -23,8 +23,8 @@ Tkinter (interfaz gráfica)
 
 🔹 1. Clonar el repositorio
 
- git clone https://github.com/tu-usuario/gestor-inventarios.git
- cd gestor-inventarios
+    git clone https://github.com/tu-usuario/gestor-inventarios.git
+    cd gestor-inventarios
 
 🔹 2. Instalar dependencias
 
