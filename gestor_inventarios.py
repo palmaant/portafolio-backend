@@ -1,7 +1,8 @@
 import sqlite3
+import os
 from tkinter import Tk, Label, Entry, Button, Listbox, END
 
-# Conexión a la base de datos
+# Verificar y conectar la base de datos
 def conectar_db():
     conn = sqlite3.connect("inventario.db")
     cursor = conn.cursor()
@@ -15,6 +16,19 @@ def conectar_db():
     """)
     conn.commit()
     conn.close()
+
+# Verificar si la tabla existe
+def verificar_tabla():
+    conn = sqlite3.connect("inventario.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='productos'")
+    tabla = cursor.fetchone()
+    conn.close()
+    if tabla:
+        print("✅ La tabla 'productos' existe.")
+    else:
+        print("❌ La tabla 'productos' NO existe. Se creará nuevamente.")
+        conectar_db()
 
 # Agregar producto
 def agregar_producto():
@@ -37,6 +51,12 @@ def mostrar_productos():
     for producto in productos:
         lista.insert(END, f"{producto[0]} - {producto[1]} | Cantidad: {producto[2]} | Precio: ${producto[3]}")
 
+# Eliminar base de datos si está corrupta
+if os.path.exists("inventario.db"):
+    print("Base de datos en:", os.path.abspath("inventario.db"))
+else:
+    print("⚠ No se encontró la base de datos. Se creará una nueva.")
+
 # Interfaz gráfica
 ventana = Tk()
 ventana.title("Gestor de Inventarios")
@@ -57,7 +77,10 @@ Button(ventana, text="Agregar", command=agregar_producto).grid(row=3, column=0, 
 
 lista = Listbox(ventana, width=50)
 lista.grid(row=4, column=0, columnspan=2)
+
+# Asegurar que la base de datos y la tabla existen antes de mostrar productos
+conectar_db()
+verificar_tabla()
 mostrar_productos()
 
-conectar_db()
 ventana.mainloop()
