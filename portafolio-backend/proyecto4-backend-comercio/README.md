@@ -59,7 +59,10 @@ Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
 ```env
 MONGO_DETAILS=mongodb://localhost:27017
 MONGO_DB=commerce_db
+SECRET_KEY=<clave_secreta>
 ```
+
+Asegúrate de que el archivo `.env` no se suba al repositorio para proteger datos sensibles.
 
 ### 5. Inicia el servidor
 ```bash

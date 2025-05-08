@@ -5,6 +5,19 @@ Esta es una API desarrollada con **FastAPI** que permite la autenticación de us
 
 ---
 
+## Configuración
+
+Para configurar el proyecto, crea un archivo `.env` con las siguientes variables:
+
+```
+SECRET_KEY=<clave_secreta>
+MONGO_DETAILS=mongodb://localhost:27017
+```
+
+Asegúrate de que el archivo `.env` no se suba al repositorio para proteger datos sensibles.
+
+---
+
 ## Características
 - Registro de usuarios con encriptación de contraseñas.
 - Inicio de sesión con generación de tokens JWT.
@@ -44,7 +57,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
    Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
    ```env
    MONGO_DETAILS=mongodb://localhost:27017
-   SECRET_KEY=tu_clave_secreta_super_segura
+   SECRET_KEY=<clave_secreta>
    ```
 
    - `MONGO_DETAILS`: URL de conexión a MongoDB.
@@ -108,7 +121,7 @@ uvicorn==0.23.2
   {
       "username": "usuario1",
       "email": "usuario1@example.com",
-      "password": "password123"
+      "password": "<contraseña>"
   }
   ```
 - **Respuesta**:
@@ -125,7 +138,7 @@ uvicorn==0.23.2
   ```json
   {
       "email": "usuario1@example.com",
-      "password": "password123"
+      "password": "<contraseña>"
   }
   ```
 - **Respuesta**:
@@ -172,14 +185,14 @@ curl -X GET http://127.0.0.1:8000/
 ```bash
 curl -X POST http://127.0.0.1:8000/register \
 -H "Content-Type: application/json" \
--d '{"username": "usuario1", "email": "usuario1@example.com", "password": "password123"}'
+-d '{"username": "usuario1", "email": "usuario1@example.com", "password": "<contraseña>"}'
 ```
 
 #### **Prueba el inicio de sesión (`POST /login`)**
 ```bash
 curl -X POST http://127.0.0.1:8000/login \
 -H "Content-Type: application/json" \
--d '{"email": "usuario1@example.com", "password": "password123"}'
+-d '{"email": "usuario1@example.com", "password": "<contraseña>"}'
 ```
 
 ---

@@ -55,6 +55,16 @@ Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 
 5. Accede a la API en [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
+## Configuración sensible
+
+Para configurar el proyecto, crea un archivo `.env` con las siguientes variables:
+
+```
+MONGO_DETAILS=mongodb://localhost:27017
+```
+
+Asegúrate de que el archivo `.env` no se suba al repositorio para proteger datos sensibles.
+
 ## 📖 Documentación de la API
 
 La API incluye documentación interactiva generada automáticamente por FastAPI:
